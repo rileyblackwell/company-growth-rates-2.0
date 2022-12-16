@@ -3,36 +3,43 @@ import numpy as np
 class Result(object):
     def __init__(self, company):
         self.company = company
-        self.revenues_projection = None
+        self.revenue_projections = np.array([])
 
-    def create_revenues_projection(self, years):
+    def create_revenue_projections(self, years):
         """ 
             REQUIRES: years >= 0
-            EFFECTS: Creates a np array of projected revenues with len[years + 1]
+            EFFECTS: Creates a np array of projected revenues with len[years]
         """
         if (years < 0):
             raise ValueError
+      
+        revenue = self.company.get_ttm_revenue()
+        revenue_growth_rate = self.company.get_revenue_growth_rate()
+        projected_revenues = [] 
+        i = 0
+        while i < years:
+            projected_revenues.append(revenue)  
+            revenue = revenue * revenue_growth_rate    
+            i += 1
         
-        self.revenues_projection = revenue_projection(self.company, years)
+        self.revenue_projections = np.array(projected_revenues)
 
-    def get_revenues_projection(self):
+    def get_revenue_projections(self):
         """ EFFECTS: Returns a np array"""
-        return self.revenues_projection            
+        return self.revenue_projections
 
+    def get_gross_profit_projections(self):
+        """ EFFECTS: Returns a np array"""
+        return self.get_revenue_projections() * self.company.get_gross_margin_percentage()
 
-def revenue_projection(company, years):
-    """ EFFECTS: Returns a np array of projected revenues with len[years + 1]."""
-    projected_revenues = [] 
-    revenue = company.get_ttm_revenue()
-    revenue_growth_rate = company.get_revenue_growth_rate()
-    i = 0
-    while i <= years:
-        projected_revenues.append(revenue)  
-        revenue = revenue * revenue_growth_rate    
-        i += 1
+    def get_operating_profit_projections(self):
+        """ EFFECTS: Returns a np array"""
+        return self.get_revenue_projections() * self.company.get_operating_margin_percentage()
 
-    return np.array(projected_revenues)
-
+    def get_net_profit_projections(self):
+        """ EFFECTS: Returns a np array"""
+        return self.get_revenue_projections() * self.company.get_net_margin_percentage()            
+    
 
 def create_results(companies):
     results = {}
