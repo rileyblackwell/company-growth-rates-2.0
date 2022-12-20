@@ -12,12 +12,8 @@ print() # Prints an extra new line
 company_names_response = input().lower()
 company_names_response = set(company_names_response.split(', '))
 for company in company_names_response:
-    while company not in results:
-        print('No data for this company.  Enter a different company: \n' +
-              'Enter \'quit\' to exit: ')    
-        company = input()
-        if company == 'quit':
-            raise ValueError('User did not enter a valid company name!')
+    if company not in results:
+        raise ValueError('User did not enter a valid company name!')   
 
 print('Enter a number of years to view.  Press \'Enter\' to use default of 5 years: ')
 years_response = input()
@@ -46,4 +42,9 @@ for company in company_names_response:
         print_projections.net_profit_projections(company, results)
 
 print('Graph results? y/n')
-graph_results_response = input().lower()    
+graph_results_response = input().lower()
+x_vals = []
+for year in range(0, years):
+    x_vals.append(year)
+if (graph_results_response == 'y' or graph_results_response == 'yes'):
+    print_projections.graph_projections(x_vals, metrics, company_names_response, results)
