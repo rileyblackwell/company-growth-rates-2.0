@@ -5,6 +5,9 @@ class Result(object):
         self.company = company
         self.revenue_projections = np.array([])
 
+    def get_name(self):
+        return self.company.get_name()
+    
     def create_revenue_projections(self, years):
         """ 
             REQUIRES: years >= 0
@@ -40,8 +43,7 @@ class Result(object):
         """ EFFECTS: Returns a np array"""
         return self.get_revenue_projections() * self.company.get_net_margin_percentage()            
     
-
-def create_results(companies):
+def load_results(companies):
     results = {}
     for company in companies.values():
         results[company.get_name()] = Result(company)
