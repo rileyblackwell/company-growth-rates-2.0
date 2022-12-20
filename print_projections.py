@@ -18,7 +18,7 @@ def operating_profit_projections(company_name, results):
 def net_profit_projections(company_name, results):
     print(format_projection(results[company_name].get_net_profit_projections()))           
 
-def graph_revenue_projections(companies, results):
+def graph_projections(metrics, companies, results):
     plt.figure()
     for company_name in companies:
         revenue_projections = results[company_name].get_revenue_projections()

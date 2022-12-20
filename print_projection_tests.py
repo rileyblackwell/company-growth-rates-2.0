@@ -5,7 +5,7 @@ import print_projections
 
 class TestOutput(unittest.TestCase):
     def test_revenue_projections(self):
-        results = projections.create_results(company_data.create_companies())
+        results = projections.load_results(company_data.load_companies())
         for company_name in results.keys():
             results[company_name].create_revenue_projections(5)
             

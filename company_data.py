@@ -1,12 +1,12 @@
 import pandas as pd
 
-def read_company_data():
+def read_company_data(filename):
     """ EFFECTS: Returns a Pandas dataframe that contains columns of company data.
-                Column name- Company name
-                Row 1- TTM revenue
-                R
+        Column name- Company name
+        Row 1 - TTM revenue, Row 2 - YoY revenue growth rate, Row 3 - gross margin %
+        Row 4 - operating margin %, Row 5 - net income %      
     """
-    return pd.read_csv("company_data.csv")
+    return pd.read_csv(filename)
 
 class Company(object):
     def __init__(self, name, ttm_revenue, revenue_growth_rate, gross_margin_percentage,
@@ -36,9 +36,9 @@ class Company(object):
     def get_net_margin_percentage(self):
         return self.net_margin_percentage                         
 
-def create_companies():
+def load_companies(filename):
     """ EFFECTS: Returns a dictionary, {[company name] : Company object}"""
-    company_df = read_company_data()
+    company_df = read_company_data(filename)
     companies = {}
 
     for company in company_df:
