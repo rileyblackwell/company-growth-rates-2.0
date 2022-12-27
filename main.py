@@ -33,13 +33,13 @@ for company in company_names_response:
     print(f'\n{company.upper()}')
 
     if 'revenue' in metrics:
-        print_projections.revenue_projections(company, results)
+        print_projections.revenue(company, results)
 
     if 'operating income' in metrics:
-        print_projections.operating_profit_projections(company, results)
+        print_projections.operating_profit(company, results)
 
     if 'net income' in metrics:
-        print_projections.net_profit_projections(company, results)
+        print_projections.net_profit(company, results)
 
 print('Graph results? y/n')
 graph_results_response = input().lower()
