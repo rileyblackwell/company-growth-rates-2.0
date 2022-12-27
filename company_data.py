@@ -27,6 +27,9 @@ class Company(object):
     def get_revenue_growth_rate(self):
         return self.revenue_growth_rate
 
+    def set_revenue_growth_rate(self, growth_rate):
+        self.revenue_growth_rate = growth_rate    
+
     def get_gross_margin_percentage(self):
         return self.gross_margin_percentage
 

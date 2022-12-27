@@ -3,10 +3,10 @@ import company_data
 
 class TestCompanyData(unittest.TestCase):
     def setUp(self):
-        self.company = company_data.Company('intel', 55, .05, 1.2, 1.15, 1.1)
+        self.company = company_data.Company('intel', 55, 1.05, .2, .15, .1)
     
     def test_company_ctor(self):
-        company = company_data.Company('intel', 55, .05, 1.2, 1.15, 1.1)
+        company = company_data.Company('intel', 55, 1.05, .2, .15, .1)
 
         self.assertEqual(company.get_name(), 'intel')
     
@@ -23,16 +23,20 @@ class TestCompanyData(unittest.TestCase):
         self.assertEqual(self.company.get_ttm_revenue(), 55)
 
     def test_company_get_revenue_growth_rate(self):
-        self.assertEqual(self.company.get_revenue_growth_rate(), .05)
+        self.assertEqual(self.company.get_revenue_growth_rate(), 1.05)
+
+    def test_company_set_revenue_growth_rate(self):
+        self.company.set_revenue_growth_rate(1.1)
+        self.assertEqual(self.company.get_revenue_growth_rate(), 1.1)    
 
     def test_company_get_gross_margin_percentage(self):
-        self.assertEqual(self.company.get_gross_margin_percentage(), 1.2)
+        self.assertEqual(self.company.get_gross_margin_percentage(), .2)
 
     def test_company_get_operating_margin_percentage(self):
-        self.assertEqual(self.company.get_operating_margin_percentage(), 1.15)     
+        self.assertEqual(self.company.get_operating_margin_percentage(), .15)     
 
     def test_company_get_net_margin_percentage(self):
-        self.assertEqual(self.company.get_net_margin_percentage(), 1.1)
+        self.assertEqual(self.company.get_net_margin_percentage(), .1)
 
     def test_load_companies(self):
         companies = company_data.load_companies('company_data.csv')

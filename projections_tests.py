@@ -16,6 +16,13 @@ class TestProjections(unittest.TestCase):
     def test_result_get_name(self):
         self.assertEqual(self.result.get_name(), 'intel') 
     
+    def test_get_revenue_growth_rate(self):
+        self.assertEqual(self.result.get_revenue_growth_rate(), 1.1) 
+
+    def test_get_revenue_growth_rate(self):
+        self.result.set_revenue_growth_rate(1.2)
+        self.assertEqual(self.result.get_revenue_growth_rate(), 1.2)     
+    
     def test_result_get_revenue_projections(self):
         revenue_projections = self.result.get_revenue_projections()
 

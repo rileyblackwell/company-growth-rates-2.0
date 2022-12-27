@@ -7,6 +7,12 @@ class Result(object):
 
     def get_name(self):
         return self.company.get_name()
+
+    def get_revenue_growth_rate(self):
+        return self.company.get_revenue_growth_rate()
+
+    def set_revenue_growth_rate(self, growth_rate):
+        self.company.set_revenue_growth_rate(growth_rate)      
     
     def create_revenue_projections(self, years):
         """ 

@@ -15,7 +15,7 @@ for company in company_names_response:
     if company not in results:
         raise ValueError('User did not enter a valid company name!')   
 
-print('Enter a number of years to view.  Press \'Enter\' to use default of 5 years: ')
+print('\nEnter a number of years to view.  Press \'Enter\' to use default of 5 years: ')
 years_response = input()
 try:
     years = int(years_response)
@@ -24,12 +24,24 @@ except ValueError:
     years = 5   
 
 print('Enter a comma seperated list of the metrics to be viewed:' + 
-      '\n- revenue\n- operating income\n- net income')
+      '\n- revenue\n- operating income\n- net income\n')
 metrics = input().lower()
 metrics = set(metrics.split(', '))
 
 for company in company_names_response:
-    results[company].create_revenue_projections(years)
+    print('\nEnter a revenue growth rate (ex. 1.2 = 20%).  Press \'Enter\' to use default of ' + 
+          f'{round((results[company].get_revenue_growth_rate() - 1) * 100, 1)}% for {company}:')
+    revenue_growth_rate_response = input()  
+    
+    if (revenue_growth_rate_response != ''):
+        try:
+            results[company].set_revenue_growth_rate(float(revenue_growth_rate_response))
+        except ValueError:
+            print('Default revenue growth rate used:') 
+    else:
+        print('Default revenue growth rate used:') 
+
+    results[company].create_revenue_projections(years) 
     print(f'\n{company.upper()}')
 
     if 'revenue' in metrics:
@@ -43,8 +55,9 @@ for company in company_names_response:
 
 print('Graph results? y/n')
 graph_results_response = input().lower()
-x_vals = []
-for year in range(0, years):
-    x_vals.append(year)
+
 if (graph_results_response == 'y' or graph_results_response == 'yes'):
+    x_vals = []
+    for year in range(0, years):
+        x_vals.append(year)
     print_projections.graph_projections(x_vals, metrics, company_names_response, results)

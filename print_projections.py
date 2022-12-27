@@ -1,8 +1,10 @@
-import matplotlib
 import matplotlib.pyplot as plt
 
 prop_cycle = plt.rcParams['axes.prop_cycle']
-
+plt.rcParams['lines.linewidth'] = 1.5
+plt.rcParams['lines.dotted_pattern'] = [1, 8]
+plt.rcParams['lines.dashed_pattern'] = [12, 6]
+ 
 def format_projection(projections):
     projections_str = ''
     for projection in projections:
